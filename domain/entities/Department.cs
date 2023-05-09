@@ -7,11 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace company_central.domain.entities {
-    internal class Department : UniqueRegistry<Department>, ICrudActions<Department, ResponseCrudAction<Department>> {
-        public override Department getOneById(int id) {
-            throw new NotImplementedException();
-        }
+    internal class Department : UniqueRegistry, ICrudActions<Department, ResponseCrudAction<Department>> {
+        string name { get; set; }
+        int quantityOfEmployees { get; set; }
 
+        public Department(string name, int quantityOfEmployees) {
+            this.name = name;
+            this.quantityOfEmployees = quantityOfEmployees;
+        }
         ResponseCrudAction<Department> ICrudActions<Department, ResponseCrudAction<Department>>.create(Department entity) {
             throw new NotImplementedException();
         }

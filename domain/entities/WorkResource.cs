@@ -7,24 +7,30 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace company_central.domain.entities {
-    internal class WorkResource : UniqueRegistry<WorkResource>, ICrudActions<WorkResource, WorkResource> {
-        public override WorkResource getOneById(int id) {
+    internal class WorkResource : UniqueRegistry, ICrudActions<WorkResource, ResponseCrudAction<WorkResource>> {
+        string name { get; set; }
+        string? description { get; set; }
+        int quantity { get; set; }
+
+        public WorkResource(string name, string? description, int quantity) {
+            this.name = name;
+            this.description = description;
+            this.quantity = quantity;
+        }
+
+        ResponseCrudAction<WorkResource> ICrudActions<WorkResource, ResponseCrudAction<WorkResource>>.create(WorkResource entity) {
             throw new NotImplementedException();
         }
 
-        WorkResource ICrudActions<WorkResource, WorkResource>.create(WorkResource entity) {
+        bool ICrudActions<WorkResource, ResponseCrudAction<WorkResource>>.delete(int id) {
             throw new NotImplementedException();
         }
 
-        bool ICrudActions<WorkResource, WorkResource>.delete(int id) {
+        ResponseCrudAction<WorkResource>[] ICrudActions<WorkResource, ResponseCrudAction<WorkResource>>.list() {
             throw new NotImplementedException();
         }
 
-        WorkResource[] ICrudActions<WorkResource, WorkResource>.list() {
-            throw new NotImplementedException();
-        }
-
-        WorkResource ICrudActions<WorkResource, WorkResource>.update(WorkResource entity) {
+        ResponseCrudAction<WorkResource> ICrudActions<WorkResource, ResponseCrudAction<WorkResource>>.update(WorkResource entity) {
             throw new NotImplementedException();
         }
     }

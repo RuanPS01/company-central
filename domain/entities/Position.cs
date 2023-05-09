@@ -7,9 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace company_central.domain.entities {
-    internal class Position : UniqueRegistry<Position>, ICrudActions<Position, ResponseCrudAction<Position>> {
-        public override Position getOneById(int id) {
-            throw new NotImplementedException();
+    internal class Position : UniqueRegistry, ICrudActions<Position, ResponseCrudAction<Position>> {
+        string name { get; set; }
+        double baseSalaryValue { get; set; }
+
+        public Position(string name, double baseSalaryValue) {
+            this.name = name;
+            this.baseSalaryValue = baseSalaryValue;
         }
 
         ResponseCrudAction<Position> ICrudActions<Position, ResponseCrudAction<Position>>.create(Position entity) {

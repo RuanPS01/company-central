@@ -7,9 +7,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace company_central.domain.entities {
-    internal class Employee : UniqueRegistry<Employee>, ICrudActions<Employee, ResponseCrudAction<Employee>> {
-        public override Employee getOneById(int id) {
-            throw new NotImplementedException();
+    internal class Employee : UniqueRegistry, ICrudActions<Employee, ResponseCrudAction<Employee>> {
+        double salary { get; set; }
+        DateTime hiringDate { get; set; }
+        Vacation vacation { get; set; }
+        Position position { get; set; }
+        Department department { get; set; }
+        PersonalData personalData { get; set; }
+
+        public Employee(double salary, DateTime hiringDate, Vacation vacation, Position position, Department department, PersonalData personalData) {
+            this.salary = salary;
+            this.hiringDate = hiringDate;
+            this.vacation = vacation;
+            this.position = position;
+            this.department = department;
+            this.personalData = personalData;
         }
 
         ResponseCrudAction<Employee> ICrudActions<Employee, ResponseCrudAction<Employee>>.create(Employee entity) {

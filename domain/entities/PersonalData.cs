@@ -7,25 +7,29 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace company_central.domain.entities {
-    internal class PersonalData : UniqueRegistry<PersonalData>, ICrudActions<PersonalData, ResponseCrudAction<PersonalData>> {
-        public override PersonalData getOneById(int id) {
-            throw new NotImplementedException();
-        }
+    internal class PersonalData : UniqueRegistry {
+        string completeName;
+        Address? address;
+        string? rg;
+        string? cpf;
+        string? workCardNumber;
+        string? dateOfBirth;
+        string? gender;
+        string? email;
+        string? telefone;
+        EmergencyContact? emergencyContact;
 
-        ResponseCrudAction<PersonalData> ICrudActions<PersonalData, ResponseCrudAction<PersonalData>>.create(PersonalData entity) {
-            throw new NotImplementedException();
-        }
-
-        bool ICrudActions<PersonalData, ResponseCrudAction<PersonalData>>.delete(int id) {
-            throw new NotImplementedException();
-        }
-
-        ResponseCrudAction<PersonalData>[] ICrudActions<PersonalData, ResponseCrudAction<PersonalData>>.list() {
-            throw new NotImplementedException();
-        }
-
-        ResponseCrudAction<PersonalData> ICrudActions<PersonalData, ResponseCrudAction<PersonalData>>.update(PersonalData entity) {
-            throw new NotImplementedException();
+        public PersonalData(string completeName, Address? address, string? rg, string? cpf, string? workCardNumber, string? dateOfBirth, string? gender, string? email, string? telefone, EmergencyContact? emergencyContact) {
+            this.completeName = completeName;
+            this.address = address;
+            this.rg = rg;
+            this.cpf = cpf;
+            this.workCardNumber = workCardNumber;
+            this.dateOfBirth = dateOfBirth;
+            this.gender = gender;
+            this.email = email;
+            this.telefone = telefone;
+            this.emergencyContact = emergencyContact;
         }
     }
 }

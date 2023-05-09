@@ -7,9 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace company_central.domain.entities {
-    internal class Benefit : UniqueRegistry<Benefit>, ICrudActions<Benefit, ResponseCrudAction<Benefit>> {
-        public override Benefit getOneById(int id) {
-            throw new NotImplementedException();
+    internal class Benefit : UniqueRegistry, ICrudActions<Benefit, ResponseCrudAction<Benefit>> {
+        string name { get; set; }
+        double? valueGainToEmployee { get; set; }
+        double? costToEmployee { get; set; }
+
+        public Benefit(string name, double? valueGainToEmployee, double? costToEmployee) {
+            this.name = name;
+            this.valueGainToEmployee = valueGainToEmployee;
+            this.costToEmployee = costToEmployee;
         }
 
         ResponseCrudAction<Benefit> ICrudActions<Benefit, ResponseCrudAction<Benefit>>.create(Benefit entity) {
