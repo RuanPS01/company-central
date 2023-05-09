@@ -33,5 +33,9 @@ namespace company_central.domain.entities {
         ResponseCrudAction<WarehouseItem> ICrudActions<WarehouseItem, ResponseCrudAction<WarehouseItem>>.update(WarehouseItem entity) {
             throw new NotImplementedException();
         }
+
+        ResponseCrudAction<WarehouseItem> ICrudActions<WarehouseItem, ResponseCrudAction<WarehouseItem>>.getOne() {
+            throw new NotImplementedException();
+        }
     }
 }

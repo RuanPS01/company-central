@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace company_central.domain.entities {
     internal class Vacation : UniqueRegistry {
-        int usedDays { get; set; } = 0;
-        int pendingDays { get; set; } = 30;
+        int usedDays { get; set; }
+        int pendingDays { get; set; }
         
-        public Vacation(int usedDays, int pendingDays) {
+        public Vacation(int usedDays = 0, int pendingDays = 30) {
             this.usedDays = usedDays;
             this.pendingDays = pendingDays;
         }

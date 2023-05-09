@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace company_central.domain.entities {
     internal class Employee : UniqueRegistry, ICrudActions<Employee, ResponseCrudAction<Employee>> {
@@ -39,5 +40,13 @@ namespace company_central.domain.entities {
         ResponseCrudAction<Employee> ICrudActions<Employee, ResponseCrudAction<Employee>>.update(Employee entity) {
             throw new NotImplementedException();
         }
+
+        ResponseCrudAction<Employee> ICrudActions<Employee, ResponseCrudAction<Employee>>.getOne() {
+            throw new NotImplementedException();
+        }
+
+        //public Employee getData() {
+        //    return { };
+        //}
     }
 }

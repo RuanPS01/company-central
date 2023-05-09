@@ -9,6 +9,7 @@ namespace company_central.domain.interfaces {
         public O create(I entity);
         public O update(I entity);
         public O[] list();
+        public O getOne();
         public bool delete(int id);
     }
 }

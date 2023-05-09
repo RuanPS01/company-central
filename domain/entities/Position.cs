@@ -31,5 +31,9 @@ namespace company_central.domain.entities {
         ResponseCrudAction<Position> ICrudActions<Position, ResponseCrudAction<Position>>.update(Position entity) {
             throw new NotImplementedException();
         }
+
+        ResponseCrudAction<Position> ICrudActions<Position, ResponseCrudAction<Position>>.getOne() {
+            throw new NotImplementedException();
+        }
     }
 }
