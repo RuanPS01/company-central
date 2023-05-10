@@ -1,7 +1,10 @@
 # company-central
-
+### Idealização
+Este projeto foi idealizado para ser um gerenciador de funcionários para uma empresa, podendo colocar dados de endereço, contato de emergência, dados referente aos seus benefícios, itens de almoxarifado, cargo, férias e outros.
+___
 Projeto em C# com interação via Terminal. 
 ### Implementado no Visual Studio Community
+Para executar o projeto, basta abri-lo no Visual Studio e executar a aplicação com ou sem depuração.
 ___
 Esse projeto possui as seguintes **classes de entidades**:
  - Address - (classe para guardar endereço de um funcionário ou outra entidade)
