@@ -1,5 +1,6 @@
 ﻿using company_central.domain.entities.abstracts;
 using company_central.domain.interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,34 +8,41 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace company_central.domain.entities {
-    internal class EmergencyContact : UniqueRegistry, ICrudActions<EmergencyContact, ResponseCrudAction<EmergencyContact>> {
-        string completeName { get; set; }
-        string phone { get; set; }
-        Address address { get; set; }
-        public EmergencyContact(string completeName, string phone, Address address) {
+    internal class EmergencyContact : Address {
+        public string completeName { get; set; }
+        public string phone { get; set; }
+        public string email { get; set; }
+
+        public EmergencyContact(
+            string completeName, 
+            string phone,
+            string email,
+            int? localNumber, 
+            string? street, 
+            string? neighbohood, 
+            string? city, 
+            string? state, 
+            string? country
+        ) : base(
+            localNumber, 
+            street, 
+            neighbohood, 
+            city, 
+            state, 
+            country
+        ) {
             this.completeName = completeName;
+            this.email = email;
             this.phone = phone;
-            this.address = address;
         }
 
-        ResponseCrudAction<EmergencyContact> ICrudActions<EmergencyContact, ResponseCrudAction<EmergencyContact>>.create(EmergencyContact entity) {
-            throw new NotImplementedException();
-        }
-
-        bool ICrudActions<EmergencyContact, ResponseCrudAction<EmergencyContact>>.delete(int id) {
-            throw new NotImplementedException();
-        }
-
-        ResponseCrudAction<EmergencyContact>[] ICrudActions<EmergencyContact, ResponseCrudAction<EmergencyContact>>.list() {
-            throw new NotImplementedException();
-        }
-
-        ResponseCrudAction<EmergencyContact> ICrudActions<EmergencyContact, ResponseCrudAction<EmergencyContact>>.update(EmergencyContact entity) {
-            throw new NotImplementedException();
-        }
-
-        ResponseCrudAction<EmergencyContact> ICrudActions<EmergencyContact, ResponseCrudAction<EmergencyContact>>.getOne() {
-            throw new NotImplementedException();
+        public string ToJson() {
+            return JsonConvert.SerializeObject(this, Formatting.Indented,
+                new JsonSerializerSettings {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    PreserveReferencesHandling = PreserveReferencesHandling.None
+                }
+            );
         }
     }
 }

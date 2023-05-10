@@ -1,5 +1,6 @@
 ﻿using company_central.domain.entities.abstracts;
 using company_central.domain.interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,33 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace company_central.domain.entities {
-    internal class Position : UniqueRegistry, ICrudActions<Position, ResponseCrudAction<Position>> {
-        string name { get; set; }
-        double baseSalaryValue { get; set; }
+    internal class Position {
+        public string name { get; set; }
+        public double minSalaryValue { get; set; }
+        public double? maxSalaryValue { get; set; }
 
-        public Position(string name, double baseSalaryValue) {
+        public Position(string name, double minSalaryValue, double maxSalaryValue) {
             this.name = name;
-            this.baseSalaryValue = baseSalaryValue;
+            this.minSalaryValue = minSalaryValue;
+            this.maxSalaryValue = maxSalaryValue;
         }
 
-        ResponseCrudAction<Position> ICrudActions<Position, ResponseCrudAction<Position>>.create(Position entity) {
-            throw new NotImplementedException();
-        }
-
-        bool ICrudActions<Position, ResponseCrudAction<Position>>.delete(int id) {
-            throw new NotImplementedException();
-        }
-
-        ResponseCrudAction<Position>[] ICrudActions<Position, ResponseCrudAction<Position>>.list() {
-            throw new NotImplementedException();
-        }
-
-        ResponseCrudAction<Position> ICrudActions<Position, ResponseCrudAction<Position>>.update(Position entity) {
-            throw new NotImplementedException();
-        }
-
-        ResponseCrudAction<Position> ICrudActions<Position, ResponseCrudAction<Position>>.getOne() {
-            throw new NotImplementedException();
+        public string ToJson() {
+            return JsonConvert.SerializeObject(this, Formatting.Indented,
+                new JsonSerializerSettings {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    PreserveReferencesHandling = PreserveReferencesHandling.None
+                }
+            );
         }
     }
 }

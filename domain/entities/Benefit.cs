@@ -1,5 +1,7 @@
 ﻿using company_central.domain.entities.abstracts;
 using company_central.domain.interfaces;
+using company_central.external.repository;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace company_central.domain.entities {
-    internal class Benefit : UniqueRegistry, ICrudActions<Benefit, ResponseCrudAction<Benefit>> {
+    internal class Benefit : UniqueRegistry, ICrudActions<ResponseCrudAction<Benefit>, Benefit, BenefitRepository> {
         string name { get; set; }
         double? valueGainToEmployee { get; set; }
         double? costToEmployee { get; set; }
@@ -18,24 +20,43 @@ namespace company_central.domain.entities {
             this.costToEmployee = costToEmployee;
         }
 
-        ResponseCrudAction<Benefit> ICrudActions<Benefit, ResponseCrudAction<Benefit>>.create(Benefit entity) {
-            throw new NotImplementedException();
+        ResponseCrudAction<Benefit> ICrudActions<ResponseCrudAction<Benefit>, Benefit, BenefitRepository>
+            .saveOnRepo(BenefitRepository databaseRepository) {
+            try {
+                databaseRepository.Save(this);
+                return new ResponseCrudAction<Benefit>(true, this);
+            } catch(Exception error) {
+                return new ResponseCrudAction<Benefit>(false, "Error to createOnRepo in " + this.GetType().Name + ". Exception:" + error.Message.ToString());
+            }
         }
 
-        bool ICrudActions<Benefit, ResponseCrudAction<Benefit>>.delete(int id) {
-            throw new NotImplementedException();
+        ResponseCrudAction<Benefit> ICrudActions<ResponseCrudAction<Benefit>, Benefit, BenefitRepository>
+            .updateOnRepo(BenefitRepository databaseRepository, Benefit dataToUpdate) {
+            try {
+                Benefit dataOfRepository = databaseRepository.Update(dataToUpdate);
+                return new ResponseCrudAction<Benefit>(true, dataOfRepository);
+            } catch(Exception error) {
+                return new ResponseCrudAction<Benefit>(false, "Error to updateOnRepo in " + this.GetType().Name + ". Exception:" + error.Message.ToString());
+            }
         }
 
-        ResponseCrudAction<Benefit>[] ICrudActions<Benefit, ResponseCrudAction<Benefit>>.list() {
-            throw new NotImplementedException();
+        bool ICrudActions<ResponseCrudAction<Benefit>, Benefit, BenefitRepository>
+            .deleteOnRepo(BenefitRepository databaseRepository) {
+            try {
+                databaseRepository.Delete(this.id);
+                return true;
+            } catch(Exception) {
+                return false;
+            }
         }
 
-        ResponseCrudAction<Benefit> ICrudActions<Benefit, ResponseCrudAction<Benefit>>.update(Benefit entity) {
-            throw new NotImplementedException();
-        }
-
-        ResponseCrudAction<Benefit> ICrudActions<Benefit, ResponseCrudAction<Benefit>>.getOne() {
-            throw new NotImplementedException();
+        public string ToJson() {
+            return JsonConvert.SerializeObject(this, Formatting.Indented,
+                new JsonSerializerSettings {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    PreserveReferencesHandling = PreserveReferencesHandling.None
+                }
+            );
         }
     }
 }
